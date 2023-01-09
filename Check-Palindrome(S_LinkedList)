@@ -1,0 +1,99 @@
+-by Megha varsha S
+Int-A, svce
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+C#, OCaml, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <iostream>
+#include<stack>
+using namespace std;
+struct node
+{
+    char data;
+    struct node *next;
+};
+struct node *head=NULL;
+
+void create (char ch)
+{
+    struct node *p=(struct node*)malloc(sizeof(struct node*));
+    if(p==NULL)
+    {cout<<"overflow";}
+    else{
+    p->data=ch;
+    if(head==NULL)
+    {
+        p->next=NULL;
+        head=p;
+    }
+    else{
+        struct node *temp=head;
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=p;
+        p->next=NULL;
+        
+    }
+    }
+}
+void show()
+{
+    struct node *pn=head;
+    while(pn!=NULL)
+    {
+        cout<<pn->data<<",";
+        pn=pn->next;
+    }
+}      
+
+int main()
+{
+string str;
+cout<<"Enter the string:";
+cin>>str;
+for(int i=0;i<str.length();i++)
+{
+    create(str[i]);
+}
+stack <char> s;
+struct node*temp=head;
+while(temp!=NULL)
+{
+s.push(temp->data);
+temp=temp->next;
+}
+/*cout<<"INITIAL:";
+show();
+cout<<"CHECK:";*/
+struct node*temp1=head;
+while(temp1!=NULL&&s.empty()!=1)
+{
+
+    if(temp1->data==s.top())
+    {temp1=temp1->next;
+        s.pop();
+    }
+    else{
+        break;
+    }
+}
+if(s.empty())
+{
+    cout<<"TRUE";
+}
+else
+{
+    cout<<"FALSE";
+}
+return 0;
+}
+
+OUTPUT:
+Enter the string:madam
+TRUE
